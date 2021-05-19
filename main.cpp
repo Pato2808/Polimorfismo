@@ -30,17 +30,30 @@ int main(){
                 if(op == 1){
                     int nc;
                     double sal;
+                    bool repetido = false;
                     cout << "Introduzca el numero de cuenta: " << endl;
                     cin >> nc;
                     cout << "Introduzca el saldo:" << endl;
                     cin >> sal;
 
-                    arrDatos[numCuentas] = new CtaBanc(nc,sal);
-                    numCuentas++;
+                    for(int i = 0; i < numCuentas; i++){
+                        if(arrDatos[i]->getNumCuenta() == nc){
+                            repetido = true;
+                            break;
+                        }
+                    }
+                    if(repetido){
+                        cout << "El numero de cuenta ingresado ya esta siendo utilizado" << endl;
+                        break;
+                    } else{
+                        arrDatos[numCuentas] = new CtaBanc(nc,sal);
+                        numCuentas++;
+                    }
                 } else if(op == 2){
                     int nc;
                     double sal;
                     double cuo;
+                    bool repetido = false;
                     cout << "Introduzca el numero de cuenta: " << endl;
                     cin >> nc;
                     cout << "Introduzca el saldo en la cuenta: " << endl;
@@ -48,8 +61,19 @@ int main(){
                     cout << "Introduzca la cuota a cobrar: " << endl;
                     cin >> cuo;
 
-                    arrDatos[numCuentas] = new Chequera(nc,sal,cuo);
-                    numCuentas++;
+                    for(int i = 0; i < numCuentas; i++){
+                        if(arrDatos[i]->getNumCuenta() == nc){
+                            repetido = true;
+                            break;
+                        }
+                    }
+                    if(repetido){
+                        cout << "El numero de cuenta ingresado ya esta siendo utilizado" << endl;
+                        break;
+                    } else{
+                        arrDatos[numCuentas] = new Chequera(nc,sal,cuo);
+                        numCuentas++;
+                    }  
                 }
                 break;
             }
